@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "express": "^4.18.1",
+    "mime-db": "^1.52.0",
+    "selenium-webdriver": "^4.1.2"
+  },
+  "name": "election-nepal-live",
+  "version": "0.0.1",
+  "description": "Scraps election stats",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dioveath/election-2079-live.git"
+  },
+  "keywords": [
+    "election",
+    "nepal",
+    "2079",
+    "balen"
+  ],
+  "author": "Saroj Rai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dioveath/election-2079-live/issues"
+  },
+  "homepage": "https://github.com/dioveath/election-2079-live#readme",
+  "devDependencies": {
+    "prettier": "2.6.2"
+  }
+}
