@@ -63,7 +63,7 @@ async function getVotesForKathmandu() {
       await driver.sleep(100);
     }
   
-    console.log(datas);
+    // console.log(datas);
     
     return datas;
   } catch (e) { 

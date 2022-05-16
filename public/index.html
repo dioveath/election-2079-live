@@ -23,8 +23,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/brands.min.css"
     />
-    <script src="main.js"></script>
-
+    
     <style>
       * {
         box-sizing: border-box;
@@ -53,12 +52,12 @@
         object-fit: cover;
       }
 
-      .card-title { 
+      .card-title {
         font-size: 20px;
         font-weight: 700;
       }
 
-      .card-subtitle { 
+      .card-subtitle {
         font-size: 20px;
         font-weight: 700;
       }
@@ -70,6 +69,11 @@
         justify-content: center;
       }
     </style>
+
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" 
+    integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" 
+    crossorigin="anonymous"></script>
+    
     <script>
       async function getDatas() {
         const datas = await fetch("http://localhost:5000/api/v1/kathmandu", {
@@ -81,11 +85,7 @@
         return datas.json();
       }
 
-      (async () => {
-        const allDatas = await getDatas();
-
-        console.log(allDatas);
-
+      async function renderUIs(allDatas) {
         const container = document.querySelector(".container");
 
         for (let i = 0; i < allDatas.length; i++) {
@@ -97,12 +97,12 @@
           container.appendChild(title);
           container.appendChild(list);
           container.appendChild(document.createElement(`br`));
-          container.appendChild(document.createElement(`br`));          
+          container.appendChild(document.createElement(`br`));
 
           for (let j = 0; j < 4; j++) {
             const card = document.createElement(`div`);
             card.innerHTML = `
-	      <div class="card">
+	          <div class="card">
 		<img
 		    src="${allDatas[i].candidateImages[j]}"
 		    class="card-image"
@@ -121,7 +121,28 @@
             list.appendChild(card);
           }
         }
-      })();
+
+
+
+      }
+
+      const socket = io("http://localhost:5000");
+        socket.on("connect", () => {
+          console.log("connected", socket.id);
+        });
+
+        socket.on('disconnect', () => { 
+          console.log('disconnected', socket.id);
+        });
+
+        socket.on('update', (data) => {
+          console.log(data);
+          const container = document.querySelector(".container");
+          container.innerHTML = "";
+          renderUIs(data);
+        });
+
+      
     </script>
   </head>
   <body>
