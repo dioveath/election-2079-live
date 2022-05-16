@@ -40,7 +40,7 @@
       }
 
       .card {
-        width: 120px;
+        width: 300px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -49,17 +49,30 @@
 
       .card-image {
         width: 100%;
-        height: 100px;
+        height: 400px;
         object-fit: cover;
+      }
+
+      .card-title { 
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .card-subtitle { 
+        font-size: 20px;
+        font-weight: 700;
       }
 
       .card-footer {
         width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
     <script>
       async function getDatas() {
-        const datas = await fetch("http://localhost:3000/api/v1/kathmandu", {
+        const datas = await fetch("http://localhost:5000/api/v1/kathmandu", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -98,10 +111,10 @@
 		    alt="..."
 		/>
 		<div class="py-2">
-		  <p class="mb-0"> ${allDatas[i].candidateNames[j]}</p>
+		  <h2 class="mb-0 card-title"> ${allDatas[i].candidateNames[j]}</h2>
 		</div>
 		<div class="card-footer">
-		  <small class="text-muted"> Votes: ${allDatas[i].voteNumbers[j]} </small>
+		  <small class="card-subtitle "> Votes: ${allDatas[i].voteNumbers[j]} </small>
 		</div>
 	      </div>`;
 
