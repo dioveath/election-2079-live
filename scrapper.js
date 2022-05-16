@@ -1,8 +1,13 @@
 const {Builder, Browser, By, Key, until} = require('selenium-webdriver');
+const webdriver = require('selenium-webdriver');
 const { elementsLocated, elementIsEnabled } = require('selenium-webdriver/lib/until');
 
+let driver = new webdriver.Builder()
+    .forBrowser(webdriver.Browser.FIREFOX)
+    .build();
+
 async function getVotesForKathmandu() {
-  let driver = await new Builder().forBrowser(Browser.FIREFOX).build();
+  // let driver = await new Builder().forBrowser(Browser.FIREFOX).build();
   let datas = []; 
   try {
     await driver.get('https://localelection.ekantipur.com/pradesh-3/district-kathmandu?lng=eng');
@@ -70,7 +75,8 @@ async function getVotesForKathmandu() {
     console.log(e.message);
     return [];
   } finally {
-    await driver.quit();
+    console.log("finished fetching data!");
+    // await driver.quit();
   }
 }
 
